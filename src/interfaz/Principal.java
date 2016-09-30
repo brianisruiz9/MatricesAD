@@ -21,9 +21,9 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        JButton botonesH[]={cmdCrear, cmdLimpiar};
-        JButton botonesD[]={cmdAutomatico,cmdManual,cmdOperacion};
-        
+        JButton botonesH[] = {cmdCrear, cmdLimpiar};
+        JButton botonesD[] = {cmdAutomatico, cmdManual, cmdOperacion};
+
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
     }
@@ -57,7 +57,8 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTablaInicial = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
-        txtResultado = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtResultado = new javax.swing.JTextArea();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -148,7 +149,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 400, 230));
 
-        cmbOperaciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant. No. Pares", "No. Pares", "Letra C", "Diagonal", "Letra H" }));
+        cmbOperaciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant. No. Pares", "No. Pares", "Letra C", "Diagonal", "Letra H", "Recorrido Uno", "RecorridoDos" }));
         jPanel1.add(cmbOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
 
         tblTablaInicial.setModel(new javax.swing.table.DefaultTableModel(
@@ -167,9 +168,13 @@ public class Principal extends javax.swing.JFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtResultado.setEditable(false);
-        jPanel5.add(txtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 380, -1));
+        txtResultado.setColumns(20);
+        txtResultado.setRows(5);
+        jScrollPane3.setViewportView(txtResultado);
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 410, 70));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 370, 80));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 410, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,12 +186,10 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(977, 493));
+        setSize(new java.awt.Dimension(977, 530));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -205,10 +208,10 @@ public class Principal extends javax.swing.JFrame {
 
         tm2.setRowCount(nf);
         tm2.setColumnCount(nc);
-        
-        JButton botonesH[]={cmdAutomatico,cmdManual,cmdOperacion,cmdLimpiar};
-        JButton botonesD[]={cmdCrear};
-        
+
+        JButton botonesH[] = {cmdAutomatico, cmdManual, cmdOperacion, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear};
+
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
 
@@ -226,12 +229,16 @@ public class Principal extends javax.swing.JFrame {
                 tblTablaInicial.setValueAt(n, i, j);
             }
         }
+        JButton botonesH[] = {cmdOperacion, cmdLimpiar};
+        JButton botonesD[] = {cmdCrear, cmdManual, cmdAutomatico};
 
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
 
     }//GEN-LAST:event_cmdAutomaticoActionPerformed
 
     private void cmdOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOperacionActionPerformed
-        int op,cantPares;
+        int op, cantPares;
 
         op = cmbOperaciones.getSelectedIndex();
 
@@ -244,7 +251,7 @@ public class Principal extends javax.swing.JFrame {
                 break;
 
             case 1:
-               Helper.pares(tblTablaInicial, tblTablaResultado);
+                Helper.pares(tblTablaInicial, tblTablaResultado);
                 break;
 
             case 2:
@@ -254,16 +261,28 @@ public class Principal extends javax.swing.JFrame {
             case 3:
                 Helper.diagonal(tblTablaInicial, tblTablaResultado);
                 break;
-                
-                case 4:
+
+            case 4:
                 Helper.letraH(tblTablaInicial, tblTablaResultado);
                 break;
+                
+            case 5:
+                txtResultado.setText(Helper.recorridoUno(tblTablaInicial));
+                break;
+                
+            case 6:
+                txtResultado.setText(Helper.recorridoDos(tblTablaInicial));
+                break;
         }
-            
+        JButton botonesH[] = {cmdOperacion, cmdLimpiar};
+        JButton botonesD[] = {cmdManual, cmdAutomatico};
+
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdOperacionActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-        
+
         txtNoFilas.setText("");
         txtNoColumnas.setText("");
         txtNoFilas.requestFocusInWindow();
@@ -272,49 +291,53 @@ public class Principal extends javax.swing.JFrame {
 
         Helper.porDefectoTabla(tblTablaInicial);
         Helper.porDefectoTabla(tblTablaResultado);
-        
-        JButton botonesH[]={cmdCrear, cmdLimpiar};
-        JButton botonesD[]={cmdAutomatico,cmdManual,cmdOperacion};
-        
+
+        JButton botonesH[] = {cmdCrear, cmdLimpiar};
+        JButton botonesD[] = {cmdAutomatico, cmdManual, cmdOperacion};
+
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
 
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
-        int nf,nc,n2,n,sw, res;
-        boolean aux =true;
-        
+        int nf, nc, n2, n, sw, res;
+        boolean aux = true;
+
         nc = tblTablaInicial.getColumnCount();
         nf = tblTablaInicial.getRowCount();
-        
+
         for (int i = 0; i < nf; i++) {
             for (int j = 0; j < nc; j++) {
-                
-            
-            do {
-                sw=1;
-                try {
-                    n = Integer.parseInt(JOptionPane.showInputDialog(this, "Digite el elmento en la posición ["+i+"] ["+j+"]").trim());
-                    tblTablaInicial.setValueAt(n, i, j);
-               } catch (NumberFormatException e) {
-                    Helper.mensaje(this, "Digite un número válido",3);
-                    sw=0;
-                } catch (NullPointerException e) {
-                  res= JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
-                   if(res == 0){
-                       sw=1;
-                       i = nf;
-                       j = nc;
-                       aux =false;
-                   }else{
-                       sw=0;
-                   }
-                      
-                }
-            } while (sw==0);
+
+                do {
+                    sw = 1;
+                    try {
+                        n = Integer.parseInt(JOptionPane.showInputDialog(this, "Digite el elmento en la posición [" + i + "] [" + j + "]").trim());
+                        tblTablaInicial.setValueAt(n, i, j);
+                    } catch (NumberFormatException e) {
+                        Helper.mensaje(this, "Digite un número válido", 3);
+                        sw = 0;
+                    } catch (NullPointerException e) {
+                        res = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
+                        if (res == 0) {
+                            sw = 1;
+                            i = nf;
+                            j = nc;
+                            aux = false;
+                        } else {
+                            sw = 0;
+                        }
+
+                    }
+                } while (sw == 0);
+            }
         }
-        }
+        JButton botonesH[]={cmdOperacion, cmdLimpiar};
+        JButton botonesD[]={cmdCrear, cmdManual, cmdAutomatico};
+        
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdManualActionPerformed
 
     /**
@@ -369,10 +392,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblTablaInicial;
     private javax.swing.JTable tblTablaResultado;
     private javax.swing.JTextField txtNoColumnas;
     private javax.swing.JTextField txtNoFilas;
-    private javax.swing.JTextField txtResultado;
+    private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 }
