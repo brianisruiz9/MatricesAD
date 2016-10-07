@@ -149,7 +149,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 400, 230));
 
-        cmbOperaciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant. No. Pares", "No. Pares", "Letra C", "Diagonal", "Letra H", "Recorrido Uno", "RecorridoDos" }));
+        cmbOperaciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cant. No. Pares", "No. Pares", "Letra C", "Diagonal", "Letra H", "Recorrido Uno", "RecorridoDos", "RecorridoTres" }));
         jPanel1.add(cmbOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
 
         tblTablaInicial.setModel(new javax.swing.table.DefaultTableModel(
